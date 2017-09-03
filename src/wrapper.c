@@ -20,13 +20,13 @@
 #include <linux/ethtool.h>	/* struct ethtool_value */
 #include <linux/if_ether.h>	/* ETH_P_ALL */
 #include <linux/sockios.h>	/* SIOCETHTOOL */
-#include <net/ethernet.h>	/* ETHERTYPE_* */
 #include <net/if.h>		/* struct ifreq */
 #include <netinet/in.h>		/* htons */
 #include <netpacket/packet.h>	/* struct packet_mreq, struct sockaddr_ll */
 #include <stdlib.h>		/* srand */
 #include <string.h>		/* strncpy */
 #include <sys/ioctl.h>		/* ioctl, SIOCGIFINDEX */
+#include <sys/types.h>  /* caddr_t */
 #include <time.h>		/* time, time_t */
 #include <unistd.h>		/* close */
 
@@ -228,11 +228,11 @@ int process(char *packet)
 	payload = packet + sizeof(struct s_ethernet);
 
 	switch (htons(eth->type)) {
-		case ETHERTYPE_IP:
+		case ETH_P_IP:
 			return ipv4(eth, payload);
-		case ETHERTYPE_IPV6:
+		case ETH_P_IPV6:
 			return ipv6(eth, payload);
-		case ETHERTYPE_ARP:
+		case ETH_P_ARP:
 			log_debug("HW Protocol: ARP");
 			return arp(eth, payload);
 		default:

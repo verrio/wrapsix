@@ -14,7 +14,7 @@ AC_CONFIG_FILES([
 	src/Makefile
 ])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_HEADER([src/autoconfig.h.in])
+AC_CONFIG_HEADER([src/autoconfig.h])
 
 ###
 # Configuration options
@@ -32,8 +32,8 @@ else
         AS_COMPILER_FLAGS(AM_CFLAGS, "-O2")
 fi
 
-
-AC_DEFINE([SYSCONFDIR], "--sysconfdir--", [Configuration files directory])
+AS_AC_EXPAND(CONF_DIR, ${sysconfdir})
+AC_DEFINE_UNQUOTED([SYSCONFDIR], "$CONF_DIR", [Configuration files directory])
 
 ###
 # Final commands

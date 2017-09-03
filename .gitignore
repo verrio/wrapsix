@@ -2,6 +2,7 @@
 aclocal.m4
 autom4te.cache/
 configure
+compile
 depcomp
 install-sh
 missing
@@ -14,10 +15,14 @@ src/Makefile.in
 Makefile
 src/Makefile
 INSTALL
-src/autoconfig.h.in.in
 src/autoconfig.h.in
 src/autoconfig.h
 src/stamp-h1
+
+# IDE
+.cproject
+.project
+.settings/
 
 # build
 *.o
